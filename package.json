@@ -11,5 +11,8 @@
     "url": "git+https://github.com/alexluecke/snake-ts.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "rxjs": "6.2.1"
+  }
 }
