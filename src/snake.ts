@@ -1,4 +1,4 @@
-const enum KeyCode {
+export const enum KeyCode {
   LEFT = '37',
   UP = '38',
   RIGHT = '39',
@@ -6,20 +6,20 @@ const enum KeyCode {
   SPACE = '32'
 };
 
-const enum Direction {
+export const enum Direction {
   LEFT = 'left',
   RIGHT = 'right',
   UP = 'up',
   DOWN = 'down'
 };
 
-class SnakeGameFactory {
+export class SnakeGameFactory {
   public build(): SnakeGame {
     return new SnakeGame(new Canvas2DRenderer());
   }
 }
 
-class SnakeGame {
+export class SnakeGame {
   constructor(
     public renderer: Renderer
   ) {}
@@ -28,18 +28,18 @@ class SnakeGame {
   public stop(): void {}
 }
 
-class Coord {
+export class Coord {
   constructor(public x: number, public y: number) {}
 }
 
-interface Food {
+export interface Food {
   x: number;
   y: number;
 }
 
-class Apple extends Coord implements Food {}
+export class Apple extends Coord implements Food {}
 
-class Snake {
+export class Snake {
   private _body: Coord[] = [];
 
   constructor(body: Coord[]) {
@@ -84,16 +84,16 @@ class Snake {
   }
 }
 
-interface Renderer {
+export interface Renderer {
   render(buffer: Thing[]): void;
   init(): void;
 }
 
-class Thing {
+export class Thing {
   constructor(public coord: Coord, public color: string) {}
 }
 
-class Canvas2DRenderer implements Renderer {
+export class Canvas2DRenderer implements Renderer {
   private _canvas: HTMLCanvasElement;
   public _context: CanvasRenderingContext2D; // TODO: make not public
   private _size = 10;
