@@ -1,0 +1,1 @@
+{"version":3,"file":"snake-game-factory.js","sourceRoot":"","sources":["../src/snake-game-factory.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,gBAAgB,EAAE,MAAM,GAAG,CAAC;AAEhD,MAAM;IACG,KAAK;QACV,OAAO,IAAI,SAAS,CAAC,IAAI,gBAAgB,EAAE,CAAC,CAAC;IAC/C,CAAC;CACF"}

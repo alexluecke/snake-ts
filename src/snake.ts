@@ -1,47 +1,4 @@
-import { timer } from 'rxjs';
-
-export const enum KeyCode {
-  LEFT = '37',
-  UP = '38',
-  RIGHT = '39',
-  DOWN = '40',
-  SPACE = '32'
-};
-
-export const enum Direction {
-  LEFT = 'left',
-  RIGHT = 'right',
-  UP = 'up',
-  DOWN = 'down'
-};
-
-export class SnakeGameFactory {
-  public build(): SnakeGame {
-    return new SnakeGame(new Canvas2DRenderer());
-  }
-}
-
-export class SnakeGame {
-  constructor(
-    public renderer: Renderer
-  ) {}
-
-  public start(): void {
-    timer(0, 500).subscribe(() => console.info('looping'));
-  }
-  public stop(): void {}
-}
-
-export class Coord {
-  constructor(public x: number, public y: number) {}
-}
-
-export interface Food {
-  x: number;
-  y: number;
-}
-
-export class Apple extends Coord implements Food {}
+import { Coord, Food, Direction } from ".";
 
 export class Snake {
   private _body: Coord[] = [];
@@ -85,43 +42,5 @@ export class Snake {
 
   private _setHead(coord: Coord): void {
     this._body.unshift(coord);
-  }
-}
-
-export interface Renderer {
-  render(buffer: Thing[]): void;
-  init(): void;
-}
-
-export class Thing {
-  constructor(public coord: Coord, public color: string) {}
-}
-
-export class Canvas2DRenderer implements Renderer {
-  private _canvas: HTMLCanvasElement;
-  public _context: CanvasRenderingContext2D; // TODO: make not public
-  private _size = 10;
-
-  constructor() {
-    const width = 1024;
-    this._canvas = document.createElement('canvas');
-    this._canvas.setAttribute('width', '1024');
-    this._canvas.setAttribute('height', String(Math.floor(width * 9/16)));
-    this._context = this._canvas.getContext('2d');
-  }
-
-  public init(): void {
-    window.document.body.appendChild(this._canvas);
-  }
-
-  public render(buffer: Thing[]): void {
-    this._context.fillStyle = "#282828";
-    this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
-    buffer.forEach(atom => this._drawAtom(atom));
-  }
-
-  private _drawAtom(atom: Thing) {
-    this._context.fillStyle = atom.color;
-    this._context.fillRect(atom.coord.x * this._size, atom.coord.y * this._size, this._size, this._size);
   }
 }

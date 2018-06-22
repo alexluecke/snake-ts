@@ -3,8 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "outDir": "./dist",
-    "sourceMap": false,
-    "declaration": false,
+    "sourceMap": true,
+    "declaration": true,
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -18,5 +18,12 @@
       "es2017",
       "dom"
     ]
-  }
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
 }
