@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./src",
-    "outDir": "./dist/snake",
+    "outDir": "./dist",
     "sourceMap": false,
     "declaration": false,
     "moduleResolution": "node",
