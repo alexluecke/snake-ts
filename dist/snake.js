@@ -1,26 +1,29 @@
+import { timer } from 'rxjs';
 ;
 ;
-class SnakeGameFactory {
+export class SnakeGameFactory {
     build() {
         return new SnakeGame(new Canvas2DRenderer());
     }
 }
-class SnakeGame {
+export class SnakeGame {
     constructor(renderer) {
         this.renderer = renderer;
     }
-    start() { }
+    start() {
+        timer(0, 500).subscribe(() => console.info('looping'));
+    }
     stop() { }
 }
-class Coord {
+export class Coord {
     constructor(x, y) {
         this.x = x;
         this.y = y;
     }
 }
-class Apple extends Coord {
+export class Apple extends Coord {
 }
-class Snake {
+export class Snake {
     constructor(body) {
         this._body = [];
         this._body = body;
@@ -56,13 +59,13 @@ class Snake {
         this._body.unshift(coord);
     }
 }
-class Thing {
+export class Thing {
     constructor(coord, color) {
         this.coord = coord;
         this.color = color;
     }
 }
-class Canvas2DRenderer {
+export class Canvas2DRenderer {
     constructor() {
         this._size = 10;
         const width = 1024;

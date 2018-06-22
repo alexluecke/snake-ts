@@ -1,3 +1,5 @@
+import { timer } from 'rxjs';
+
 export const enum KeyCode {
   LEFT = '37',
   UP = '38',
@@ -24,7 +26,9 @@ export class SnakeGame {
     public renderer: Renderer
   ) {}
 
-  public start(): void {}
+  public start(): void {
+    timer(0, 500).subscribe(() => console.info('looping'));
+  }
   public stop(): void {}
 }
 
