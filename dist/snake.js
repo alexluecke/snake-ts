@@ -1,38 +1,42 @@
-import { Coord } from ".";
-export class Snake {
-    constructor(body) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = require(".");
+var Snake = /** @class */ (function () {
+    function Snake(body) {
         this._body = [];
         this._body = body;
     }
-    getBody() {
+    Snake.prototype.getBody = function () {
         return this._body;
-    }
-    eatFood(item) {
-        this._setHead(new Coord(item.x, item.y));
-    }
-    move(direction) {
-        const head = this.getHead();
+    };
+    Snake.prototype.eatFood = function (item) {
+        this._setHead(new _1.Coord(item.x, item.y));
+    };
+    Snake.prototype.move = function (direction) {
+        var head = this.getHead();
         this._body.pop();
         switch (direction) {
             case "left" /* LEFT */:
-                this._setHead(new Coord(head.x - 1, head.y));
+                this._setHead(new _1.Coord(head.x - 1, head.y));
                 break;
             case "right" /* RIGHT */:
-                this._setHead(new Coord(head.x + 1, head.y));
+                this._setHead(new _1.Coord(head.x + 1, head.y));
                 break;
             case "up" /* UP */:
-                this._setHead(new Coord(head.x, head.y + 1));
+                this._setHead(new _1.Coord(head.x, head.y + 1));
                 break;
             case "down" /* DOWN */:
-                this._setHead(new Coord(head.x, head.y - 1));
+                this._setHead(new _1.Coord(head.x, head.y - 1));
                 break;
         }
-    }
-    getHead() {
+    };
+    Snake.prototype.getHead = function () {
         return this._body[0];
-    }
-    _setHead(coord) {
+    };
+    Snake.prototype._setHead = function (coord) {
         this._body.unshift(coord);
-    }
-}
+    };
+    return Snake;
+}());
+exports.Snake = Snake;
 //# sourceMappingURL=snake.js.map

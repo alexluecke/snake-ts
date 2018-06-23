@@ -1,7 +1,11 @@
-export class Coord {
-    constructor(x, y) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Coord = /** @class */ (function () {
+    function Coord(x, y) {
         this.x = x;
         this.y = y;
     }
-}
+    return Coord;
+}());
+exports.Coord = Coord;
 //# sourceMappingURL=coord.js.map
