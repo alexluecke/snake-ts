@@ -1,9 +1,14 @@
-import { Coord, Food, Direction } from ".";
+import { Coord } from "./coord";
+import { Direction } from "./direction";
+import { Food } from "./food";
 
 export class Snake {
   private _body: Coord[] = [];
 
   constructor(body: Coord[]) {
+    if (body.length < 1) {
+      throw new Error('no');
+    }
     this._body = body;
   }
 
@@ -18,7 +23,7 @@ export class Snake {
   public move(direction: Direction): void {
     const head = this.getHead();
 
-    this._body.pop()
+    this._body.shift()
 
     switch (direction) {
       case Direction.LEFT:
@@ -37,10 +42,10 @@ export class Snake {
   }
 
   public getHead(): Coord {
-    return this._body[0];
+    return this._body[this._body.length - 1];
   }
 
   private _setHead(coord: Coord): void {
-    this._body.unshift(coord);
+    this._body.push(coord);
   }
 }
