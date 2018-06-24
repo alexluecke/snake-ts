@@ -10,6 +10,8 @@
     "noUnusedParameters": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"
