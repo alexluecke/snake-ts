@@ -7,6 +7,7 @@ import { KeyCode } from './key-code';
 import { range } from 'lodash';
 import { Renderer } from './renderer';
 import { Snake } from './snake';
+import { Some, None, Option } from 'space-lift';
 
 export class SnakeGame {
   private direction: Direction = Direction.RIGHT;
@@ -38,21 +39,34 @@ export class SnakeGame {
     return new Snake(range(20).map((_, i) => new Coord(i + 1, 1)));
   }
 
-  private getDirection(keyCode: KeyCode): Direction | undefined {
-    if (keyCodes.indexOf(keyCode) === -1) {
-      return;
+  private isNextDirectionValid(direction: Direction): boolean {
+    switch (this.direction) {
+      case Direction.LEFT:
+        return direction !== Direction.RIGHT;
+      case Direction.RIGHT:
+        return direction !== Direction.LEFT;
+      case Direction.UP:
+        return direction !== Direction.DOWN;
+      case Direction.DOWN:
+        return direction !== Direction.UP;
     }
 
+    return false;
+  }
+
+  private getDirection(keyCode: KeyCode): Option<Direction> {
     switch (keyCode) {
       case KeyCode.LEFT:
-          return Direction.LEFT;
+          return Some(Direction.LEFT);
       case KeyCode.RIGHT:
-          return Direction.RIGHT;
+          return Some(Direction.RIGHT);
       case KeyCode.UP:
-          return Direction.UP;
+          return Some(Direction.UP);
       case KeyCode.DOWN:
-          return Direction.DOWN;
+          return Some(Direction.DOWN);
     }
+
+    return None;
   }
 }
 
