@@ -18,7 +18,7 @@ export class SnakeGame {
 
   public start(): void {
     this.renderer.init();
-    const snake = this.createSnake();
+    let snake = this.createSnake();
 
     fromEvent(window.document, 'keydown').subscribe(event => {
       const direction = this.getDirection(String((event as KeyboardEvent).keyCode) as KeyCode).getOrElse(this.direction);
@@ -28,8 +28,16 @@ export class SnakeGame {
     });
 
     interval(0, animationFrameScheduler).pipe(filter(tick => tick%5 === 0)).subscribe(() => {
+
+      snake.visit({
+        visit: (visitee: Snake) => {
+          const nextHeadCoord = this.nextCoord(visitee.getHead(), this.direction);
+          const [ , ...body ] = visitee.getBody();
+          visitee.setBody([ ...body, nextHeadCoord]);
+        }
+      });
+
       this.renderer.render(snake.getBody().map(coord => new Atom(coord, '#FFFFFF')));
-      snake.move(this.direction);
     });
   }
 
@@ -68,5 +76,23 @@ export class SnakeGame {
 
     return None;
   }
-}
 
+  /**
+   * Move the snake to new coordinate depending on direction. Note that the position y direction is down in the
+   * coordinate system.
+   */
+  public nextCoord(coord: Coord, direction: Direction): Coord {
+    switch (direction) {
+      case Direction.LEFT:
+        return new Coord(coord.x - this.dx, coord.y);
+      case Direction.RIGHT:
+        return new Coord(coord.x + this.dx, coord.y);
+      case Direction.UP:
+        return new Coord(coord.x, coord.y - this.dx);
+      case Direction.DOWN:
+        return new Coord(coord.x, coord.y + this.dx);
+    }
+
+    return coord;
+  }
+}
