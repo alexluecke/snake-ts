@@ -16,6 +16,7 @@ var SnakeGame = /** @class */ (function () {
     SnakeGame.prototype.start = function () {
         var _this = this;
         this.renderer.init();
+        var _a = this.renderer.getMinMax(), maxWidth = _a[0], maxHeight = _a[1];
         var snake = this.createSnake();
         rxjs_1.fromEvent(window.document, 'keydown').subscribe(function (event) {
             var direction = _this.getDirection(String(event.keyCode)).getOrElse(_this.direction);
@@ -28,7 +29,8 @@ var SnakeGame = /** @class */ (function () {
                 visit: function (visitee) {
                     var nextHeadCoord = _this.nextCoord(visitee.getHead(), _this.direction);
                     var _a = visitee.getBody(), body = _a.slice(1);
-                    if (_this.hasCollision(nextHeadCoord, body)) {
+                    if (_this.hasCollision(nextHeadCoord, body) ||
+                        _this.isOutOfBounds(nextHeadCoord, maxWidth, maxHeight)) {
                         _this.direction = "right" /* RIGHT */;
                         snake = _this.createSnake();
                     }
@@ -46,6 +48,9 @@ var SnakeGame = /** @class */ (function () {
     };
     SnakeGame.prototype.hasCollision = function (coord, coords) {
         return coords.some(function (item) { return item.x === coord.x && item.y === coord.y; });
+    };
+    SnakeGame.prototype.isOutOfBounds = function (coord, x, y) {
+        return coord.x > x || coord.x < 0 || coord.y > y || coord.y < 0;
     };
     SnakeGame.prototype.isNextDirectionValid = function (direction) {
         switch (this.direction) {

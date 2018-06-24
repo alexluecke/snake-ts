@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Canvas2DRenderer = /** @class */ (function () {
     function Canvas2DRenderer() {
-        this._size = 30;
+        this._atomicUnit = 30;
         var dimension = 2000;
         this._canvas = document.createElement('canvas');
         this._canvas.setAttribute('width', String(dimension));
@@ -18,9 +18,12 @@ var Canvas2DRenderer = /** @class */ (function () {
         this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
         buffer.forEach(function (atom) { return _this._drawAtom(atom); });
     };
+    Canvas2DRenderer.prototype.getMinMax = function () {
+        return [Number(this._canvas.width) / this._atomicUnit, Number(this._canvas.height) / this._atomicUnit];
+    };
     Canvas2DRenderer.prototype._drawAtom = function (atom) {
         this._context.fillStyle = atom.color;
-        this._context.fillRect(atom.coord.x * this._size, atom.coord.y * this._size, this._size, this._size);
+        this._context.fillRect(atom.coord.x * this._atomicUnit, atom.coord.y * this._atomicUnit, this._atomicUnit, this._atomicUnit);
     };
     Canvas2DRenderer.prototype.getContext = function (canvas) {
         return canvas.getContext('2d') || new CanvasRenderingContext2D();

@@ -10,6 +10,7 @@ export declare class SnakeGame {
     stop(): void;
     private createSnake();
     private hasCollision(coord, coords);
+    private isOutOfBounds(coord, x, y);
     private isNextDirectionValid(direction);
     private getDirection(keyCode);
     /**
