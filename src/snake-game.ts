@@ -19,6 +19,7 @@ export class SnakeGame {
 
   public start(): void {
     this.renderer.init();
+    const [ maxWidth, maxHeight ] = this.renderer.getMinMax();
     let snake = this.createSnake();
 
     fromEvent(window.document, 'keydown').subscribe(event => {
@@ -29,13 +30,15 @@ export class SnakeGame {
     });
 
     interval(0, animationFrameScheduler).pipe(filter(tick => tick%5 === 0)).subscribe(() => {
-
       snake.visit({
         visit: (visitee: Snake) => {
           const nextHeadCoord = this.nextCoord(visitee.getHead(), this.direction);
           const [ , ...body ] = visitee.getBody();
 
-          if (this.hasCollision(nextHeadCoord, body)) {
+          if (
+            this.hasCollision(nextHeadCoord, body) ||
+            this.isOutOfBounds(nextHeadCoord, maxWidth, maxHeight)
+          ) {
             this.direction = Direction.RIGHT;
             snake = this.createSnake();
           } else {
@@ -56,6 +59,10 @@ export class SnakeGame {
 
   private hasCollision(coord: Coord, coords: Coord[]): boolean {
     return coords.some(item => item.x === coord.x && item.y === coord.y);
+  }
+
+  private isOutOfBounds(coord: Coord, x: number, y: number): boolean {
+    return coord.x > x || coord.x < 0 || coord.y > y || coord.y < 0;
   }
 
   private isNextDirectionValid(direction: Direction): boolean {

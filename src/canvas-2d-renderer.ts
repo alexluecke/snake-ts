@@ -4,7 +4,7 @@ import { Atom } from "./atom";
 export class Canvas2DRenderer implements Renderer {
   private _canvas: HTMLCanvasElement;
   private _context: CanvasRenderingContext2D;
-  private _size = 30;
+  private _atomicUnit = 30;
 
   constructor() {
     const dimension = 2000;
@@ -24,9 +24,13 @@ export class Canvas2DRenderer implements Renderer {
     buffer.forEach(atom => this._drawAtom(atom));
   }
 
+  public getMinMax(): [number, number] {
+    return [Number(this._canvas.width) / this._atomicUnit, Number(this._canvas.height) / this._atomicUnit];
+  }
+
   private _drawAtom(atom: Atom): void {
     this._context.fillStyle = atom.color;
-    this._context.fillRect(atom.coord.x * this._size, atom.coord.y * this._size, this._size, this._size);
+    this._context.fillRect(atom.coord.x * this._atomicUnit, atom.coord.y * this._atomicUnit, this._atomicUnit, this._atomicUnit);
   }
 
   private getContext(canvas: HTMLCanvasElement): CanvasRenderingContext2D {
