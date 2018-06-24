@@ -6,5 +6,6 @@ export declare class SnakeGame {
     start(): void;
     stop(): void;
     private createSnake();
+    private isNextDirectionValid(direction);
     private getDirection(keyCode);
 }
