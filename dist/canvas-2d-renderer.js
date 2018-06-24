@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Canvas2DRenderer = /** @class */ (function () {
     function Canvas2DRenderer() {
-        this._size = 10;
-        var width = 1024;
+        this._size = 30;
+        var dimension = 2000;
         this._canvas = document.createElement('canvas');
-        this._canvas.setAttribute('width', '1024');
-        this._canvas.setAttribute('height', String(Math.floor(width * 9 / 16)));
+        this._canvas.setAttribute('width', String(dimension));
+        this._canvas.setAttribute('height', String(dimension));
         this._context = this._canvas.getContext('2d');
     }
     Canvas2DRenderer.prototype.init = function () {

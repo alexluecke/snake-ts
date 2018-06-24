@@ -1,15 +1,16 @@
-import { Renderer, Atom } from ".";
+import { Renderer } from "./renderer";
+import { Atom } from "./atom";
 
 export class Canvas2DRenderer implements Renderer {
   private _canvas: HTMLCanvasElement;
-  public _context: CanvasRenderingContext2D; // TODO: make not public
-  private _size = 10;
+  private _context: CanvasRenderingContext2D;
+  private _size = 30;
 
   constructor() {
-    const width = 1024;
+    const dimension = 2000;
     this._canvas = document.createElement('canvas');
-    this._canvas.setAttribute('width', '1024');
-    this._canvas.setAttribute('height', String(Math.floor(width * 9/16)));
+    this._canvas.setAttribute('width', String(dimension));
+    this._canvas.setAttribute('height', String(dimension));
     this._context = this._canvas.getContext('2d');
   }
 

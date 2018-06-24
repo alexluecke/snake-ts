@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
-  "types" : "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "start": "webpack-dev-server --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,6 +17,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/lodash": "^4.14.110",
+    "lodash": "^4.17.10",
     "rxjs": "6.2.1"
   },
   "devDependencies": {

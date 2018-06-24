@@ -1,4 +1,4 @@
-import { Coord } from ".";
+import { Coord } from "./coord";
 export declare class Atom {
     coord: Coord;
     color: string;

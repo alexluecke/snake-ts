@@ -5,3 +5,5 @@ export const enum KeyCode {
   DOWN = '40',
   SPACE = '32'
 };
+
+export const keyCodes = [ KeyCode.LEFT, KeyCode.UP, KeyCode.RIGHT, KeyCode.DOWN ];

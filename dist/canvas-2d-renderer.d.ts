@@ -1,10 +1,11 @@
-import { Renderer, Atom } from ".";
+import { Renderer } from "./renderer";
+import { Atom } from "./atom";
 export declare class Canvas2DRenderer implements Renderer {
     private _canvas;
-    _context: CanvasRenderingContext2D;
+    private _context;
     private _size;
     constructor();
     init(): void;
     render(buffer: Atom[]): void;
-    private _drawAtom;
+    private _drawAtom(atom);
 }

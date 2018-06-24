@@ -4,6 +4,7 @@ import { Food } from "./food";
 
 export class Snake {
   private _body: Coord[] = [];
+  private dx = 1;
 
   constructor(body: Coord[]) {
     if (body.length < 1) {
@@ -20,6 +21,10 @@ export class Snake {
     this._setHead(new Coord(item.x, item.y));
   }
 
+  /**
+   * Move the snake to new coordinate depending on direction. Note that the position y direction is down in the
+   * coordinate system.
+   */
   public move(direction: Direction): void {
     const head = this.getHead();
 
@@ -27,16 +32,16 @@ export class Snake {
 
     switch (direction) {
       case Direction.LEFT:
-        this._setHead(new Coord(head.x - 1, head.y));
+        this._setHead(new Coord(head.x - this.dx, head.y));
         break;
       case Direction.RIGHT:
-        this._setHead(new Coord(head.x + 1, head.y));
+        this._setHead(new Coord(head.x + this.dx, head.y));
         break;
       case Direction.UP:
-        this._setHead(new Coord(head.x, head.y + 1));
+        this._setHead(new Coord(head.x, head.y - this.dx));
         break;
       case Direction.DOWN:
-        this._setHead(new Coord(head.x, head.y - 1));
+        this._setHead(new Coord(head.x, head.y + this.dx));
         break;
     }
   }
