@@ -7,7 +7,7 @@ var Canvas2DRenderer = /** @class */ (function () {
         this._canvas = document.createElement('canvas');
         this._canvas.setAttribute('width', String(dimension));
         this._canvas.setAttribute('height', String(dimension));
-        this._context = this._canvas.getContext('2d');
+        this._context = this.getContext(this._canvas);
     }
     Canvas2DRenderer.prototype.init = function () {
         window.document.body.appendChild(this._canvas);
@@ -21,6 +21,9 @@ var Canvas2DRenderer = /** @class */ (function () {
     Canvas2DRenderer.prototype._drawAtom = function (atom) {
         this._context.fillStyle = atom.color;
         this._context.fillRect(atom.coord.x * this._size, atom.coord.y * this._size, this._size, this._size);
+    };
+    Canvas2DRenderer.prototype.getContext = function (canvas) {
+        return canvas.getContext('2d') || new CanvasRenderingContext2D();
     };
     return Canvas2DRenderer;
 }());

@@ -1,5 +1,6 @@
 import { Coord } from "./coord";
 import { Food } from "./food";
+import { Visitor } from "./visitor";
 
 export class Snake {
   private _body: Coord[] = [];
@@ -29,5 +30,9 @@ export class Snake {
 
   public setHead(coord: Coord): void {
     this._body.push(coord);
+  }
+
+  public visit(visitor: Visitor<Snake>): void {
+    visitor.visit(this);
   }
 }

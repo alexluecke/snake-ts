@@ -8,4 +8,5 @@ export declare class Canvas2DRenderer implements Renderer {
     init(): void;
     render(buffer: Atom[]): void;
     private _drawAtom(atom);
+    private getContext(canvas);
 }

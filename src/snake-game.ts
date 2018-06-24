@@ -11,6 +11,7 @@ import { Some, None, Option } from 'space-lift';
 
 export class SnakeGame {
   private direction: Direction = Direction.RIGHT;
+  private dx = 1;
 
   constructor(
     public renderer: Renderer
@@ -33,7 +34,13 @@ export class SnakeGame {
         visit: (visitee: Snake) => {
           const nextHeadCoord = this.nextCoord(visitee.getHead(), this.direction);
           const [ , ...body ] = visitee.getBody();
-          visitee.setBody([ ...body, nextHeadCoord]);
+
+          if (this.hasCollision(nextHeadCoord, body)) {
+            this.direction = Direction.RIGHT;
+            snake = this.createSnake();
+          } else {
+            visitee.setBody([ ...body, nextHeadCoord]);
+          }
         }
       });
 
@@ -45,6 +52,10 @@ export class SnakeGame {
 
   private createSnake(): Snake {
     return new Snake(range(20).map((_, i) => new Coord(i + 1, 1)));
+  }
+
+  private hasCollision(coord: Coord, coords: Coord[]): boolean {
+    return coords.some(item => item.x === coord.x && item.y === coord.y);
   }
 
   private isNextDirectionValid(direction: Direction): boolean {
